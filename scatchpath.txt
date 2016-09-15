@@ -1,4 +1,4 @@
-https://dl.dropboxusercontent.com/u/1445590/rhel-atomic-cloud-7.2.5.x86_64.vsphere.ova
+http://dl.dropboxusercontent.com/u/1445590/rhel-atomic-cloud-7.2.5.x86_64.vsphere.ova
 
 
 sed -i 's/PasswordAuthentication\ no/PasswordAuthentication\ yes/g' /etc/ssh/sshd_config
@@ -8,3 +8,18 @@ sed -i 's/PasswordAuthentication\ no/PasswordAuthentication\ yes/g' /etc/ssh/ssh
 systemctl start sshd
 
 disable selinux
+
+
+# increase disk size
+VBoxManage startvm RH_summt2016 --type headless
+
+ VBoxManage clonehd "/home/tschoots/VirtualBox VMs/RH_summt2016/disk.vmdk" cloned.vdi --format VDI --variant Fixed
+
+VBoxManage modifyhd cloned.vdi --resize 15360
+
+VBoxManage list hdds
+
+# extend the logical volume
+lvextend -L6G /dev/atomicos/root
+
+xfs_growfs /dev/atomicos/root
