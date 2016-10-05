@@ -13,7 +13,7 @@ disable selinux
 # increase disk size
 VBoxManage startvm RH_summt2016 --type headless
 
- VBoxManage clonehd "/home/tschoots/VirtualBox VMs/RH_summt2016/disk.vmdk" cloned.vdi --format VDI --variant Fixed
+ VBoxManage clonehd "/home/tschoots/VirtualBox VMs/RH_summt2016/disk.vmdk" cloned.vdi --format VDI
 
 VBoxManage modifyhd cloned.vdi --resize 15360
 
